@@ -14,6 +14,7 @@ from inspect import currentframe, getfile
 
 from . import Lib
 from . import KeyElement
+from . import KeyElement3D
 from . import CustomElement
 from .utils import VariableString, \
                    extract_value_unit, \
@@ -935,7 +936,7 @@ class Port():
 # #        return [retIn, retOut]
 
 
-@Lib.add_methods_from(KeyElement, CustomElement)
+@Lib.add_methods_from(KeyElement, CustomElement, KeyElement3D)
 class Body(PythonModeler):
 
     def __init__(self, pm, coor_sys, rel_coor, ref_name): #network
