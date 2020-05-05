@@ -1,7 +1,7 @@
 # Compiled
 *.pyc
-
+.DS_Store
+*.gds
 # Subdirectories
-/recorded_scripts
-/archive
-/drawings
+/.vscode
+/HFSSdrawpy.egg-info
