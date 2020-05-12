@@ -389,7 +389,8 @@ class Body(Modeler):
     @move_port
     def draw_cable(self, *ports, fillet="0.3mm", is_bond=False, to_meander=None,
                    meander_length=0, meander_offset=0, is_mesh=False,
-                   reverse_adaptor=False, slope=0.5, name='cable_0'):
+                   reverse_adaptor=False, slope=0.5, name='cable_0',
+                   dontmessup=False):
         """
 
 
@@ -532,19 +533,24 @@ class Body(Modeler):
         # find all intermediate paths
         total_path = None
         for ii in range(len(ports)-1):
-            path = Path(name, ports[ii], ports[ii+1], fillet)
+            if dontmessup:
+                path = Path(name, ports[ii], ports[ii+1], fillet,
+                            points=[Vector(ports[ii].pos), Vector(ports[ii+1].pos)])
+            else:
+                path = Path(name, ports[ii], ports[ii+1], fillet)
             if total_path is None:
                 total_path = path
             else:
                 total_path += path
             ports[ii+1] = ports[ii+1].r # reverse the last port
 
-        total_path.clean()
-
-        # do meandering
-        total_path.meander(to_meander[0], meander_length[0], meander_offset[0])
-
-        total_path.clean()
+        if dontmessup:
+            total_path.clean()
+    
+            # do meandering
+            total_path.meander(to_meander[0], meander_length[0], meander_offset[0])
+    
+            total_path.clean()
         # plot cable
         self.path(total_path.points, total_path.port_in, total_path.fillet,
                   name=name)
