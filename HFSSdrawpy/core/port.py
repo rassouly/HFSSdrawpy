@@ -9,6 +9,7 @@ from ..utils import Vector, \
                    val, \
                    equal_float, \
                    way
+from ..parameters import DEFAULT, PORT,MESH
 
 
 class Port():
@@ -35,6 +36,12 @@ class Port():
             self.layers = layers
             self.offsets = offsets
             self.N = 0
+
+        if 1:
+            self.widths = widths+[widths[-1]]
+            self.subnames = subnames+['mesh']
+            self.layers = layers+[MESH]
+            self.offsets = offsets+[0]
 
         if self.body.ports_to_move is not None:
             find_last_list(self.body.ports_to_move).append(self)

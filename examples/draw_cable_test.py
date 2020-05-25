@@ -7,7 +7,7 @@ Created on Tue Oct 29 14:05:00 2019
 import os
 
 from HFSSdrawpy import Modeler, Body
-from HFSSdrawpy.parameters import TRACK, GAP, MESH
+from HFSSdrawpy.parameters import TRACK, GAP
 import HFSSdrawpy.libraries.example_elements as elt
 # import HFSSdrawpy.libraries.base_elements as base
 
@@ -35,7 +35,7 @@ offset = pm.set_variable('-50um')
 port0, = elt.create_port(chip2, [track, track+2*gap]) # default is the widths of track and gap
 
 with chip2(['2.0mm', '0.0mm'], [1, 0]):
-    port1, = elt.create_port(chip2, [track, track+2*gap,track+2*gap],subnames=['track','gap','mesh'],layers=[TRACK,GAP,MESH]) # default is the widths of track and gap
+    port1, = elt.create_port(chip2, [track, track+2*gap]) # default is the widths of track and gap
 
 bond_length, bond_slope, pcb_track, pcb_gap = '200um', 0.5, '300um', '200um'
 
