@@ -546,9 +546,11 @@ class Body(Modeler):
 
         total_path.clean()
         # plot cable
-        self.path(total_path.points, total_path.port_in, total_path.fillet,
+        cable = self.path(total_path.points, total_path.port_in, total_path.fillet,
                   name=name)
-
+        if is_mesh is not None:
+            cable_mesh = cable[0].copy(new_name=name+'_mesh')
+            cable_mesh.assign_mesh_length(is_mesh)
         # if bond plot bonds
         if is_bond:
             self.draw_bond(total_path.to_bond(), *ports[0].bond_params(), name=name+'_wb')
