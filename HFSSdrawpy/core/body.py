@@ -544,7 +544,7 @@ class Body(Modeler):
                 total_path += path
             ports[ii+1] = ports[ii+1].r # reverse the last port
 
-        if dontmessup:
+        if not dontmessup:
             total_path.clean()
     
             # do meandering
